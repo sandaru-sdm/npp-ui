@@ -22,9 +22,6 @@ function Login() {
   
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
   
-    console.log("Username:", username);
-    console.log("Password:", password);
-  
     try {
       const response = await axios.post(`${apiBaseUrl}/auth/login`, {
         username,
