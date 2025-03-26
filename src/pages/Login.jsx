@@ -35,8 +35,10 @@ function Login() {
       }
   
       localStorage.setItem("username", response.data.username);
+      console.log("username", response.data.username);
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role", response.data.userRole);
+      localStorage.setItem("role", response.data.role
+      );
       navigate("/dashboard");
     } catch (err) {
       console.error("Login Error:", err);

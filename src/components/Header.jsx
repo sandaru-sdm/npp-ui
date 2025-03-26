@@ -1,49 +1,64 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
     <div>
-        <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-light">
-          <a
-            href="/"
-            className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+      <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-light">
+        <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `nav-link px-2 ${
+                  isActive ? "active text-primary" : "link-dark"
+                }`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/users"
+              className={({ isActive }) =>
+                `nav-link px-2 ${
+                  isActive ? "active text-primary" : "link-dark"
+                }`
+              }
+            >
+              Users
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/villagers"
+              className={({ isActive }) =>
+                `nav-link px-2 ${
+                  isActive ? "active text-primary" : "link-dark"
+                }`
+              }
+            >
+              Villagers
+            </NavLink>
+          </li>
+        </ul>
+
+        <div className="col-md-3 text-end">
+          <button
+            className="btn btn-outline-danger me-2"
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("role");
+              localStorage.removeItem("username");
+              window.location.href = "/login";
+            }}
           >
-          </a>
-
-          <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li>
-              <a href="#" className="nav-link px-2 link-secondary">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 link-dark">
-                Features
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 link-dark">
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 link-dark">
-                FAQs
-              </a>
-            </li>
-            <li>
-              <a href="#" className="nav-link px-2 link-dark">
-                About
-              </a>
-            </li>
-          </ul>
-
-          <div class="col-md-3 text-end">
-            <button type="button" className="btn btn-outline-danger me-2">
-              Logout
-            </button>
-          </div>
-        </header>
+            <i className="bi bi-box-arrow-left me-2"></i>
+            Sign out
+          </button>
+        </div>
+      </header>
       <div className="b-example-divider"></div>
     </div>
   );

@@ -1,60 +1,92 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import Avatar from "../assets/Avatar-1.png";
+import Logo from "../assets/Compass-logo.png";
+import axios from "axios";
 
 function SideBar() {
+  const userRole = localStorage.getItem("role");
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+
+  const [name, setName] = useState("");
+  
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(`${apiBaseUrl}/auth/${username}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log("API Response:", response.data);
+        setName(response.data.name);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    fetchData();
+  });
+
   return (
     <div>
       <div
         className="d-flex flex-column flex-shrink-0 p-3 bg-light"
         style={{ width: "280px", height: "100vh" }}
       >
-        <a
-          href="/"
+        <NavLink
+          to="/dashboard"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
         >
-            <img src="" alt="" />
-          <span className="fs-4">Sidebar</span>
-        </a>
+          <img
+            src={Logo}
+            alt="Logo"
+            width="32"
+            height="32"
+            className="rounded-circle me-2"
+          />
+          <span className="fs-4">NPP</span>
+        </NavLink>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="nav-item">
-            <a href="#" className="nav-link active" aria-current="page">
-              {/* <svg className="bi me-2" width="16" height="16">
-                <use xlink:href="#home" />
-              </svg> */}
-              Home
-            </a>
+            <NavLink
+              className="nav-link text-decoration-none link-dark"
+              to="/dashboard"
+              style={({ isActive }) => ({
+                color: isActive ? "black" : "",
+              })}
+            >
+              <i className="bi bi-speedometer me-2"></i> Dashboard
+            </NavLink>
           </li>
-          <li>
-            <a href="#" className="nav-link link-dark">
-              {/* <svg className="bi me-2" width="16" height="16">
-                <use xlink:href="#speedometer2" />
-              </svg> */}
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-dark">
-              {/* <svg className="bi me-2" width="16" height="16">
-                <use xlink:href="#table" />
-              </svg> */}
-              Orders
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-dark">
-              {/* <svg className="bi me-2" width="16" height="16">
-                <use xlink:href="#grid" />
-              </svg> */}
-              Products
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link link-dark">
-              {/* <svg className="bi me-2" width="16" height="16">
-                <use xlink:href="#people-circle" />
-              </svg> */}
-              Customers
-            </a>
+          {userRole === "ADMIN" && (
+            <li className="nav-item">
+              <NavLink
+                className="nav-link text-decoration-none link-dark"
+                to="/users"
+                style={({ isActive }) => ({
+                  color: isActive ? "blue" : "",
+                })}
+              >
+                <i className="bi bi-person-circle me-2"></i> Users
+              </NavLink>
+            </li>
+          )}
+
+          <li className="nav-item">
+            <NavLink
+              className="nav-link text-decoration-none link-dark"
+              to="/villagers"
+              style={({ isActive }) => ({
+                color: isActive ? "black" : "",
+              })}
+            >
+              <i className="bi bi-people-fill me-2"></i> Villagers
+            </NavLink>
           </li>
         </ul>
         <hr />
@@ -67,40 +99,38 @@ function SideBar() {
             aria-expanded="false"
           >
             <img
-              src="https://github.com/mdo.png"
-              alt=""
+              src={Avatar}
+              alt="Profile"
               width="32"
               height="32"
               className="rounded-circle me-2"
             />
-            <strong>mdo</strong>
+            <strong>{name}</strong>
           </a>
           <ul
             className="dropdown-menu text-small shadow"
             aria-labelledby="dropdownUser2"
           >
             <li>
-              <a className="dropdown-item" href="#">
-                New project...
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Settings
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
+              <NavLink className="dropdown-item" to="/profile">
                 Profile
-              </a>
+              </NavLink>
             </li>
             <li>
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <button
+                className="dropdown-item"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("role");
+                  localStorage.removeItem("username");
+                  window.location.href = "/login";
+                }}
+              >
                 Sign out
-              </a>
+              </button>
             </li>
           </ul>
         </div>
