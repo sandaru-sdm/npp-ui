@@ -10,7 +10,7 @@ function SideBar() {
   const token = localStorage.getItem("token");
 
   const [name, setName] = useState("");
-  
+
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
@@ -34,12 +34,12 @@ function SideBar() {
   return (
     <div>
       <div
-        className="d-flex flex-column flex-shrink-0 p-3 bg-light"
-        style={{ width: "280px", height: "100vh" }}
+        className="d-flex flex-column flex-shrink-0 p-3 col-sm-none col-md-none"
+        style={{ width: "230px", height: "100vh", backgroundColor: "#800040" }}
       >
         <NavLink
           to="/dashboard"
-          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none text-white"
         >
           <img
             src={Logo}
@@ -48,48 +48,64 @@ function SideBar() {
             height="32"
             className="rounded-circle me-2"
           />
-          <span className="fs-4">NPP</span>
+          <span className="fs-4 text-white">NPP</span>
         </NavLink>
-        <hr />
-        <ul className="nav nav-pills flex-column mb-auto">
+        <hr className="text-white"/>
+        <ul className="nav nav-pills flex-column mb-auto text-white">
           <li className="nav-item">
             <NavLink
-              className="nav-link text-decoration-none link-dark"
+              className="nav-link text-decoration-none px-3 py-2 rounded"
               to="/dashboard"
               style={({ isActive }) => ({
-                color: isActive ? "black" : "",
+                backgroundColor: isActive ? "white" : "transparent",
+                color: isActive ? "black" : "white",
               })}
             >
-              <i className="bi bi-speedometer me-2"></i> Dashboard
+              <i
+                className="bi bi-speedometer me-2"
+                style={{ color: "inherit" }}
+              ></i>
+              Dashboard
             </NavLink>
           </li>
+
           {userRole === "ADMIN" && (
             <li className="nav-item">
               <NavLink
-                className="nav-link text-decoration-none link-dark"
+                className="nav-link text-decoration-none px-3 py-2 rounded"
                 to="/users"
                 style={({ isActive }) => ({
-                  color: isActive ? "blue" : "",
+                  backgroundColor: isActive ? "white" : "transparent",
+                  color: isActive ? "black" : "white",
                 })}
               >
-                <i className="bi bi-person-circle me-2"></i> Users
+                <i
+                  className="bi bi-person-circle me-2"
+                  style={{ color: "inherit" }}
+                ></i>
+                Users
               </NavLink>
             </li>
           )}
 
           <li className="nav-item">
             <NavLink
-              className="nav-link text-decoration-none link-dark"
+              className="nav-link text-decoration-none px-3 py-2 rounded"
               to="/villagers"
               style={({ isActive }) => ({
-                color: isActive ? "black" : "",
+                backgroundColor: isActive ? "white" : "transparent",
+                color: isActive ? "black" : "white",
               })}
             >
-              <i className="bi bi-people-fill me-2"></i> Villagers
+              <i
+                className="bi bi-people-fill me-2"
+                style={{ color: "inherit" }}
+              ></i>
+              Villagers
             </NavLink>
           </li>
         </ul>
-        <hr />
+        <hr className="text-white"/>
         <div className="dropdown">
           <a
             href="#"
@@ -105,7 +121,7 @@ function SideBar() {
               height="32"
               className="rounded-circle me-2"
             />
-            <strong>{name}</strong>
+            <strong className="text-white">{name}</strong>
           </a>
           <ul
             className="dropdown-menu text-small shadow"
