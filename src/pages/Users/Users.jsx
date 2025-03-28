@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import UsersTable from "./UsersTable";
+import Footer from "../../components/Footer";
 
 function Users() {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ function Users() {
           <UsersTable/>
 
         </div>
+        <Footer/>
       </div>
     </div>
   );

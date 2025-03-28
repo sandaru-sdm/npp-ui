@@ -64,26 +64,35 @@ function UsersTable() {
     {
       name: "Mobile Number",
       selector: (row) => row.mobileNumber,
+      width: "150px",
     },
     {
       name: "Role",
       selector: (row) => row.role,
       sortable: true,
-      width: "120px",
+      width: "80px",
     },
     {
-      name: "Is Activated",
+      name: "Activated",
       selector: (row) => (row.isActive ? "Yes" : "No"),
       sortable: true,
-      width: "120px",
+      width: "100px",
     },
     {
       name: "Actions",
       cell: (row) => (
-        <a href="#" className="btn btn-danger btn-sm">
-          Update
-        </a>
+        <div className="d-flex gap-2 justify-content-center align-items-center">
+          <button className="btn btn-primary btn-sm">Update</button>
+          <button
+            className={`btn btn-sm ${
+              row.isActive ? "btn-danger" : "btn-success"
+            }`}
+          >
+            {row.isActive ? "Deactivate" : "Activate"}
+          </button>
+        </div>
       ),
+      width: "170px",
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
