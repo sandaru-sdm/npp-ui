@@ -34,8 +34,8 @@ function SideBar() {
   return (
     <div>
       <div
-        className="d-flex flex-column flex-shrink-0 p-3 col-sm-none col-md-none"
-        style={{ width: "230px", height: "100vh", backgroundColor: "#800040" }}
+        className="d-flex flex-column flex-shrink-0 p-3 col-sm-none col-md-none col-lg-2 vh-100 vh-sm-100 vh-md-100"
+        style={{ width: "230px", backgroundColor: "#800040" }}
       >
         <NavLink
           to="/dashboard"
@@ -50,7 +50,7 @@ function SideBar() {
           />
           <span className="fs-4 text-white">NPP</span>
         </NavLink>
-        <hr className="text-white"/>
+        <hr className="text-white" />
         <ul className="nav nav-pills flex-column mb-auto text-white">
           <li className="nav-item">
             <NavLink
@@ -105,7 +105,7 @@ function SideBar() {
             </NavLink>
           </li>
         </ul>
-        <hr className="text-white"/>
+        <hr className="text-white" />
         <div className="dropdown">
           <a
             href="#"
