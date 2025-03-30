@@ -3,28 +3,69 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import Header from "../../components/Header";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import Footer from "../../components/Footer";
 
 function AddUser() {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("");
   const [alert, setAlert] = useState({ type: "", message: "" });
   const [submit, setSubmit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  //   if (!token) {
-  //     console.error("No token found. Redirecting to login...");
-  //     setTimeout(() => navigate("/login", { replace: true }), 0);
-  //   }
-  // }, [navigate]);
+    if (!token) {
+      console.error("No token found. Redirecting to login...");
+      setTimeout(() => navigate("/login", { replace: true }), 0);
+    }
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(password !== confirmPassword) {
+      console.log("Password and Consirm passwords are not matching");
+      setAlert({ type: "danger", message: "Passwords do not match" });
+      return;
+    }
+    setSubmit(true);
+    
+    const token = localStorage.getItem("token");
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+    const adminUsername = localStorage.getItem("username");
+
+    try {
+      const response = await axios.put(
+        `${apiBaseUrl}/auth/register`,
+        { adminUsername, name, username, password, mobileNumber, role },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setAlert({
+        type: "success",
+        message: response.data.message || "User Saved successfully!",
+      });
+
+      setTimeout(() => {
+        navigate("/users");
+      }, 2000);
+    } catch (error) {
+      setAlert({
+        type: "danger",
+        message: error.response?.data?.message || "Failed to save user.",
+      });
+    }
+  };
 
   return (
     <div className="d-flex">
@@ -58,19 +99,31 @@ function AddUser() {
                         </div>
                       )}
 
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <div className="row">
                           <div className="mb-3 col-md-6">
                             <label htmlFor="name" className="form-label">
                               Name
                             </label>
-                            <input className="form-control" id="name" />
+                            <input
+                              className="form-control"
+                              id="name"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              required
+                            />
                           </div>
                           <div className="mb-3 col-md-6">
                             <label htmlFor="mobile" className="form-label">
                               Mobile
                             </label>
-                            <input className="form-control" id="mobile" />
+                            <input
+                              className="form-control"
+                              id="mobile"
+                              value={mobileNumber}
+                              onChange={(e) => setMobileNumber(e.target.value)}
+                              required
+                            />
                           </div>
                         </div>
 
@@ -84,6 +137,7 @@ function AddUser() {
                               id="role"
                               value={role}
                               onChange={(e) => setRole(e.target.value)}
+                              required
                             >
                               <option value="USER">User</option>
                               <option value="ADMIN">Admin</option>
@@ -97,6 +151,9 @@ function AddUser() {
                               type="email"
                               className="form-control"
                               id="email"
+                              value={username}
+                              onChange={(e) => setUsername(e.target.value)}
+                              required
                             />
                           </div>
                         </div>
@@ -111,6 +168,9 @@ function AddUser() {
                                 type={showPassword ? "text" : "password"}
                                 className="form-control"
                                 id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
                               />
                               <button
                                 type="button"
@@ -126,14 +186,22 @@ function AddUser() {
                             </div>
                           </div>
                           <div className="mb-3 position-relative col-md-6">
-                            <label htmlFor="password" className="form-label">
-                              Password
+                            <label
+                              htmlFor="confirmPassword"
+                              className="form-label"
+                            >
+                              Confirm Password
                             </label>
                             <div className="input-group">
                               <input
                                 type={showPassword ? "text" : "password"}
                                 className="form-control"
-                                id="password"
+                                id="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                  setConfirmPassword(e.target.value)
+                                }
+                                required
                               />
                               <button
                                 type="button"
@@ -154,6 +222,7 @@ function AddUser() {
                           <button
                             type="submit"
                             className="btn btn-primary col-sm-12 mt-3 col-md-6"
+                            disabled={submit}
                           >
                             Submit
                           </button>
