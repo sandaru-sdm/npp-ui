@@ -105,7 +105,9 @@ function SideBar() {
             </NavLink>
           </li>
         </ul>
+
         <hr className="text-white" />
+        
         <div className="dropdown">
           <a
             href="#"
