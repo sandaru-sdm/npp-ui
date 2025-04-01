@@ -34,8 +34,12 @@ function SideBar() {
   return (
     <div>
       <div
-        className="d-flex flex-column flex-shrink-0 p-3 col-sm-none col-md-none col-lg-2 vh-100 vh-sm-100 vh-md-100"
-        style={{ width: "230px", backgroundColor: "#800040" }}
+        className="d-flex flex-column flex-shrink-0 p-3 vh-100"
+        style={{
+          width: "230px",
+          backgroundColor: "#800040",
+          minHeight: "100vh",
+        }}
       >
         <NavLink
           to="/dashboard"
@@ -107,7 +111,7 @@ function SideBar() {
         </ul>
 
         <hr className="text-white" />
-        
+
         <div className="dropdown">
           <a
             href="#"

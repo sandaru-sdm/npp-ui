@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import Header from "../../components/Header";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import axios from "axios";
 
 function AddUser() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function AddUser() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("USER");
   const [alert, setAlert] = useState({ type: "", message: "" });
   const [submit, setSubmit] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -38,9 +39,14 @@ function AddUser() {
     const token = localStorage.getItem("token");
     const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
     const adminUsername = localStorage.getItem("username");
+    // console.log(name);
+    // console.log(username);
+    // console.log(password);
+    // console.log(confirmPassword);
+    // console.log(role);
 
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `${apiBaseUrl}/auth/register`,
         { adminUsername, name, username, password, mobileNumber, role },
         {
@@ -64,6 +70,10 @@ function AddUser() {
         type: "danger",
         message: error.response?.data?.message || "Failed to save user.",
       });
+      console.error("Error:", error);
+      setTimeout(() => {
+        navigate("/add-user");
+      }, 3000);
     }
   };
 

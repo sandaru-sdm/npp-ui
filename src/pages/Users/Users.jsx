@@ -19,32 +19,28 @@ function Users() {
   }, [navigate]);
 
   return (
-    <div className="d-flex">
-      <SideBar />
-      <div className="flex-grow-1">
-        <Header />
-
-        <div className="ms-sm-auto col-lg-12 px-md-4 bg-gradient">
-          <Breadcrumbs
-            title="Users"
-            breadcrumbs={[
-              { label: "Home", path: "/dashboard" },
-              { label: "Users", path: location.pathname, active: true },
-            ]}
-          />
-
-          <div className="d-flex justify-content-center align-content-center">
-            <a href="/add-user" className="btn btn-success col-4 mb-5">
-              Add User
-            </a>
-          </div>
-
-          <UsersTable/>
-
-        </div>
-        <Footer/>
+    <div className="d-flex vh-100">
+  <SideBar />
+  <div className="flex-grow-1">
+    <Header />
+    <div className="ms-sm-auto col-lg-12 px-md-4 bg-gradient">
+      <Breadcrumbs
+        title="Users"
+        breadcrumbs={[
+          { label: "Home", path: "/dashboard" },
+          { label: "Users", path: location.pathname, active: true },
+        ]}
+      />
+      <div className="d-flex justify-content-center align-content-center">
+        <a href="/add-user" className="btn btn-success col-4 mb-5">
+          Add User
+        </a>
       </div>
+      <UsersTable />
     </div>
+    <Footer />
+  </div>
+</div>
   );
 }
 
