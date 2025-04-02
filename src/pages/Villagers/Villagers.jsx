@@ -3,6 +3,7 @@ import SideBar from "../../components/SideBar";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import VillagersTable from "./VillagersTable";
 
 function Villagers() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Villagers() {
               Add Villager
             </a>
           </div>
-
+            <VillagersTable />
         </div>
       </div>
     </div>

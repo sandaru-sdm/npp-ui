@@ -34,8 +34,8 @@ function SideBar() {
   return (
     <div>
       <div
-        className="d-flex flex-column flex-shrink-0 p-3 vh-100"
-        style={{
+        className="d-flex flex-column flex-shrink-0 p-3 vh-100 sidebar"
+        style={{ 
           width: "230px",
           backgroundColor: "#800040",
           minHeight: "100vh",
