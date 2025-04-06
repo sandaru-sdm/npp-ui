@@ -5,6 +5,7 @@ import Users from "./pages/Users/Users";
 import Villagers from "./pages/Villagers/Villagers";
 import AddUsers from "./pages/Users/AddUser";
 import AddVillager from "./pages/Villagers/AddVillager";
+import UpdateVillager from "./pages/Villagers/UpdateVillager";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
 
         <Route path="/villagers" element={<Villagers />} />
         <Route path="/add-villager" element={<AddVillager/>} />
+        <Route path="/update-villager/:id" element={<UpdateVillager />} />
 
       </Routes>
     </Router>
