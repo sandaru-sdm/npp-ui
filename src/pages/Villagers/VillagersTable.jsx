@@ -26,6 +26,7 @@ function VillagersTable() {
             "Content-Type": "application/json",
           },
         });
+        console.log("Fetched villagers:", response.data);
         setVillagers(response.data);
         setFilteredVillagers(response.data);
       } catch (error) {
@@ -79,9 +80,9 @@ function VillagersTable() {
     {
       name: "Actions",
       cell: (row) => (
-        <div className="d-flex gap-2 justify-content-center align-items-center">
+        <a href={`/update-villager/${row.id}`} className="d-flex gap-2 justify-content-center align-items-center">
           <button className="btn btn-primary btn-sm">Update</button>
-        </div>
+        </a>
       ),
       width: "170px",
       ignoreRowClick: true,

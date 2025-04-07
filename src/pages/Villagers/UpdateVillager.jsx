@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import Header from "../../components/Header";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -33,7 +33,7 @@ function UpdateVillager() {
     const fetchVillager = async () => {
       try {
         const response = await axios.get(
-          `${apiBaseUrl}/villagers/id/${id}`,
+          `${apiBaseUrl}/villagers/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
