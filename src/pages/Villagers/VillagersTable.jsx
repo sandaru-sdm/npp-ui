@@ -75,7 +75,7 @@ function VillagersTable() {
         row.address
           ? `${row.address.number}, ${row.address.line1}, ${row.address.line2}, ${row.address.division}`
           : "N/A",
-      width: "350px",
+      width: "400px",
     },
     {
       name: "Actions",
@@ -84,7 +84,7 @@ function VillagersTable() {
           <button className="btn btn-primary btn-sm">Update</button>
         </a>
       ),
-      width: "170px",
+      width: "100px",
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,

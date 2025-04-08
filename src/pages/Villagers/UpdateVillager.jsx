@@ -83,8 +83,8 @@ function UpdateVillager() {
       division,
     });
     try {
-      const response = await axios.post(
-        `${apiBaseUrl}/villagers/save`,
+      const response = await axios.patch(
+        `${apiBaseUrl}/villagers/update/${id}`,
         {
           name,
           gender,
@@ -105,7 +105,7 @@ function UpdateVillager() {
 
       setAlert({
         type: "success",
-        message: response.data.message || "Villager Saved successfully!",
+        message: response.data.message || "Villager Updated successfully!",
       });
 
       setTimeout(() => {
@@ -114,7 +114,7 @@ function UpdateVillager() {
     } catch (error) {
       setAlert({
         type: "danger",
-        message: error.response?.data?.message || "Failed to save villager.",
+        message: error.response?.data?.message || "Failed to update villager.",
       });
       console.error("Error:", error);
       setTimeout(() => {
@@ -134,7 +134,7 @@ function UpdateVillager() {
             breadcrumbs={[
               { label: "Home", path: "/dashboard" },
               { label: "Villagers", path: "/villagers" },
-              { label: "Add Villager", path: location.pathname, active: true },
+              { label: "Update Villager", path: location.pathname, active: true },
             ]}
           />
           <div className="d-flex justify-content-center align-content-center flex-grow-1">
@@ -143,7 +143,7 @@ function UpdateVillager() {
                 <div className="col-md-12">
                   <div className="card card-primary card-outline">
                     <div className="d-flex card-header align-items-center justify-content-center">
-                      <h4 className="card-title fw-bold">Add Villager</h4>
+                      <h4 className="card-title fw-bold">Update Villager</h4>
                     </div>
                     <div className="card-body">
                       {alert.message && (
@@ -167,6 +167,7 @@ function UpdateVillager() {
                               value={name}
                               onChange={(e) => setName(e.target.value)}
                               required
+                              disabled
                             />
                           </div>
                           <div className="mb-3 col-md-6">
@@ -179,6 +180,7 @@ function UpdateVillager() {
                               value={gender}
                               onChange={(e) => setGender(e.target.value)}
                               required
+                              disabled
                             >
                               <option value="">-Select-</option>
                               <option value="Male">Male</option>
