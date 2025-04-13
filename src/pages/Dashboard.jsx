@@ -15,13 +15,19 @@ function Dashboard() {
       }
 
       try {
-        const response = await axios.get(`${apiBaseUrl}/villagers/north`, {
+        const response1 = await axios.get(`${apiBaseUrl}/villagers/north`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
+        const response2 = await axios.get(`${apiBaseUrl}/villagers/east`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response1);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
