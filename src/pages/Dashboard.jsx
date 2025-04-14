@@ -27,7 +27,15 @@ function Dashboard() {
             "Content-Type": "application/json",
           },
         });
+        const response3 = await axios.get(`${apiBaseUrl}/villagers/south`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         console.log(response1);
+        console.log(response2);
+        console.log(response3);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
