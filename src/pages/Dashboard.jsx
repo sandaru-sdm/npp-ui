@@ -26,15 +26,16 @@ function Dashboard() {
 
     async function fetchData() {
       try {
-        const [north, east, south, west, count] = await Promise.all([
+        const [north, east, south, west, count, usersCount] = await Promise.all([
           api.get("/villagers/north"),
           api.get("/villagers/east"),
           api.get("/villagers/south"),
           api.get("/villagers/west"),
           api.get("/villagers/count"),
+          api.get("/api/count"),
         ]);
 
-        console.log(north.data, east.data, south.data, west.data, count.data);
+        console.log(north.data, east.data, south.data, west.data, count.data, usersCount.data);
       } catch (error) {
         console.error("Error fetching villagers:", error);
       }
