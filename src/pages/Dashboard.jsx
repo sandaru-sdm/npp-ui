@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,12 @@ import axios from "axios";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [usersCount, setUsersCount] = useState("");
+  const [villagersCount, setVillagersCount] = useState("");
+  const [northVillagersCount, setNorthVillagersCount] = useState("");
+  const [eastVillagersCount, setEastVillagersCount] = useState("");
+  const [southVillagersCount, setSouthVillagersCount] = useState("");
+  const [westVillagersCount, setWestVillagersCount] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -35,6 +41,8 @@ function Dashboard() {
           api.get("/api/count"),
         ]);
 
+        usersCount = usersCount.data;
+        // fill other data
         console.log(north.data, east.data, south.data, west.data, count.data, usersCount.data);
       } catch (error) {
         console.error("Error fetching villagers:", error);
