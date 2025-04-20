@@ -42,7 +42,11 @@ function Dashboard() {
         ]);
 
         usersCount = usersCount.data;
-        // fill other data
+        villagersCount = count.data;
+        northVillagersCount = north.data;
+        eastVillagersCount = east.data;
+        southVillagersCount = south.data;
+        westVillagersCount = west.data;
         console.log(north.data, east.data, south.data, west.data, count.data, usersCount.data);
       } catch (error) {
         console.error("Error fetching villagers:", error);
