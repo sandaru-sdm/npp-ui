@@ -67,7 +67,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-warning">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{usersCount}</h3>
                     <p>Users Count</p>
                   </div>
                   <svg
@@ -85,7 +85,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-success">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{villagersCount}</h3>
                     <p>Villagers Count</p>
                   </div>
                   <svg
@@ -103,7 +103,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-danger">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{northVillagersCount}</h3>
                     <p>North villagers Count</p>
                   </div>
                   <svg
@@ -121,7 +121,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-secondary">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{eastVillagersCount}</h3>
                     <p>East villagers Count</p>
                   </div>
                   <svg
@@ -139,7 +139,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-info">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{southVillagersCount}</h3>
                     <p>South villagers Count</p>
                   </div>
                   <svg
@@ -157,7 +157,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-primary">
                   <div className="inner">
-                    <h3>5</h3>
+                    <h3>{westVillagersCount}</h3>
                     <p>West villagers Count</p>
                   </div>
                   <svg
