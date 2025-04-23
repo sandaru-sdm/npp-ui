@@ -7,54 +7,44 @@ import axios from "axios";
 function Dashboard() {
   const navigate = useNavigate();
   const [usersCount, setUsersCount] = useState("");
-  const [villagersCount, setVillagersCount] = useState("");
-  const [northVillagersCount, setNorthVillagersCount] = useState("");
-  const [eastVillagersCount, setEastVillagersCount] = useState("");
-  const [southVillagersCount, setSouthVillagersCount] = useState("");
-  const [westVillagersCount, setWestVillagersCount] = useState("");
+  // const [villagersCount, setVillagersCount] = useState("");
+  // const [northVillagersCount, setNorthVillagersCount] = useState("");
+  // const [eastVillagersCount, setEastVillagersCount] = useState("");
+  // const [southVillagersCount, setSouthVillagersCount] = useState("");
+  // const [westVillagersCount, setWestVillagersCount] = useState("");
+
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
 
     if (!token) {
       console.error("No token found. Redirecting to login...");
       setTimeout(() => navigate("/login", { replace: true }), 0);
       return;
     }
-
-    const api = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    async function fetchData() {
-      try {
-        const [north, east, south, west, count, usersCount] = await Promise.all([
-          api.get("/villagers/north"),
-          api.get("/villagers/east"),
-          api.get("/villagers/south"),
-          api.get("/villagers/west"),
-          api.get("/villagers/count"),
-          api.get("/api/count"),
-        ]);
-
-        setUsersCount = usersCount.data;
-        setVillagersCount = count.data;
-        setNorthVillagersCount = north.data;
-        setEastVillagersCount = east.data;
-        setSouthVillagersCount = south.data;
-        setWestVillagersCount = west.data;
-        console.log(north.data, east.data, south.data, west.data, count.data, usersCount.data);
-      } catch (error) {
-        console.error("Error fetching villagers:", error);
-      }
-    }
-
-    fetchData();
   }, [navigate]);
+
+  useEffect(() => {
+    const fetchUsersCount = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/auth/count`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setUsersCount(response.data);
+      } catch (error) {
+        console.error("Failed to fetch Users count.");
+      }
+    };
+    fetchUsersCount();
+  }, [apiBaseUrl, token]);
 
   return (
     <div className="d-flex bg-gradient">
@@ -85,7 +75,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-success">
                   <div className="inner">
-                    <h3>{villagersCount}</h3>
+                    <h3></h3>
                     <p>Villagers Count</p>
                   </div>
                   <svg
@@ -103,7 +93,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-danger">
                   <div className="inner">
-                    <h3>{northVillagersCount}</h3>
+                    <h3></h3>
                     <p>North villagers Count</p>
                   </div>
                   <svg
@@ -121,7 +111,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-secondary">
                   <div className="inner">
-                    <h3>{eastVillagersCount}</h3>
+                    <h3></h3>
                     <p>East villagers Count</p>
                   </div>
                   <svg
@@ -139,7 +129,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-info">
                   <div className="inner">
-                    <h3>{southVillagersCount}</h3>
+                    <h3></h3>
                     <p>South villagers Count</p>
                   </div>
                   <svg
@@ -157,7 +147,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-primary">
                   <div className="inner">
-                    <h3>{westVillagersCount}</h3>
+                    <h3></h3>
                     <p>West villagers Count</p>
                   </div>
                   <svg
