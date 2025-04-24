@@ -7,7 +7,7 @@ import axios from "axios";
 function Dashboard() {
   const navigate = useNavigate();
   const [usersCount, setUsersCount] = useState("");
-  // const [villagersCount, setVillagersCount] = useState("");
+  const [villagersCount, setVillagersCount] = useState("");
   // const [northVillagersCount, setNorthVillagersCount] = useState("");
   // const [eastVillagersCount, setEastVillagersCount] = useState("");
   // const [southVillagersCount, setSouthVillagersCount] = useState("");
@@ -44,6 +44,25 @@ function Dashboard() {
       }
     };
     fetchUsersCount();
+
+    const fetchVillagersCount = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/villagers/count`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setVillagersCount(response.data);
+      } catch (error) {
+        console.error("Failed to fetch Villagers count.");
+      }
+    };
+    fetchVillagersCount();
   }, [apiBaseUrl, token]);
 
   return (
