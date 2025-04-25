@@ -8,7 +8,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [usersCount, setUsersCount] = useState("");
   const [villagersCount, setVillagersCount] = useState("");
-  // const [northVillagersCount, setNorthVillagersCount] = useState("");
+  const [northVillagersCount, setNorthVillagersCount] = useState("");
   // const [eastVillagersCount, setEastVillagersCount] = useState("");
   // const [southVillagersCount, setSouthVillagersCount] = useState("");
   // const [westVillagersCount, setWestVillagersCount] = useState("");
@@ -63,6 +63,28 @@ function Dashboard() {
       }
     };
     fetchVillagersCount();
+
+    const fetchNorthVillagersCount = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/villagers/north`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setNorthVillagersCount(response.data);
+      } catch (error) {
+        console.error("Failed to fetch Villagers count.");
+      }
+    };
+    fetchNorthVillagersCount();
+
+
+
   }, [apiBaseUrl, token]);
 
   return (
@@ -94,7 +116,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-success">
                   <div className="inner">
-                    <h3></h3>
+                    <h3>{villagersCount}</h3>
                     <p>Villagers Count</p>
                   </div>
                   <svg
@@ -112,7 +134,7 @@ function Dashboard() {
               <div className="col-lg-3 col-6">
                 <div className="small-box text-bg-danger">
                   <div className="inner">
-                    <h3></h3>
+                    <h3>{northVillagersCount}</h3>
                     <p>North villagers Count</p>
                   </div>
                   <svg
