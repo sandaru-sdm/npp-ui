@@ -9,7 +9,7 @@ function Dashboard() {
   const [usersCount, setUsersCount] = useState("");
   const [villagersCount, setVillagersCount] = useState("");
   const [northVillagersCount, setNorthVillagersCount] = useState("");
-  // const [eastVillagersCount, setEastVillagersCount] = useState("");
+  const [eastVillagersCount, setEastVillagersCount] = useState("");
   // const [southVillagersCount, setSouthVillagersCount] = useState("");
   // const [westVillagersCount, setWestVillagersCount] = useState("");
 
@@ -59,7 +59,7 @@ function Dashboard() {
         console.log(response.data);
         setVillagersCount(response.data);
       } catch (error) {
-        console.error("Failed to fetch Villagers count.");
+        console.error("Failed to fetch North Villagers count.");
       }
     };
     fetchVillagersCount();
@@ -83,6 +83,24 @@ function Dashboard() {
     };
     fetchNorthVillagersCount();
 
+    const fetchEastVillagersCount = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/villagers/north`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setEastVillagersCount(response.data);
+      } catch (error) {
+        console.error("Failed to fetch East Villagers count.");
+      }
+    };
+    fetchEastVillagersCount();
 
 
   }, [apiBaseUrl, token]);
