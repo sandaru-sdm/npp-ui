@@ -10,7 +10,7 @@ function Dashboard() {
   const [villagersCount, setVillagersCount] = useState("");
   const [northVillagersCount, setNorthVillagersCount] = useState("");
   const [eastVillagersCount, setEastVillagersCount] = useState("");
-  // const [southVillagersCount, setSouthVillagersCount] = useState("");
+  const [southVillagersCount, setSouthVillagersCount] = useState("");
   // const [westVillagersCount, setWestVillagersCount] = useState("");
 
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -101,6 +101,25 @@ function Dashboard() {
       }
     };
     fetchEastVillagersCount();
+
+    const fetchSouthVillagersCount = async () => {
+      try {
+        const response = await axios.get(
+          `${apiBaseUrl}/villagers/north`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log(response.data);
+        setSouthVillagersCount(response.data);
+      } catch (error) {
+        console.error("Failed to fetch South Villagers count.");
+      }
+    };
+    fetchSouthVillagersCount();
 
 
   }, [apiBaseUrl, token]);
