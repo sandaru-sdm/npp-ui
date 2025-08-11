@@ -1,12 +1,72 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# NPP-UI
 
-Currently, two official plugins are available:
+A modern React application built with Vite, featuring a modular structure for scalable UI development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- ⚡️ Fast development with Vite
+- 🔥 Hot Module Replacement (HMR)
+- 🧩 Modular component and page structure
+- 🖼️ Asset management for images and icons
+- 🧹 ESLint integration for code quality
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+```
+src/
+  assets/           # Images and icons
+  components/       # Reusable UI components
+  pages/            # Application pages
+    Users/          # User management pages
+    Villagers/      # Villager management pages
+  App.jsx           # Main App component
+  main.jsx          # Entry point
+public/             # Static files
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16+ recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running the App
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## ESLint
+
+This project uses ESLint for code linting. You can expand the configuration in `eslint.config.js` as needed.
+
+## Vite Plugins
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+## License
+
+See the [LICENSE](LICENSE) file for details.
